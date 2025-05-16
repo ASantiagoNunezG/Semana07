@@ -32,3 +32,37 @@ BEGIN
     VALUES (@name, @address, @phone, 1)
 END
 
+
+CREATE PROCEDURE USP_update_customer
+    @customer_id INT,
+    @name NVARCHAR(255),
+    @address NVARCHAR(255),
+    @phone NVARCHAR(15)
+AS
+BEGIN
+    UPDATE customers
+    SET name = @name,
+        address = @address,
+        phone = @phone
+    WHERE customer_id = @customer_id
+END
+
+EXEC USP_update_customer 
+    @customer_id = 4,
+    @name = 'Santiago Nuñez Garcia',
+    @address = 'Cascanueces 123',
+    @phone = '999888999';
+
+--Eliminando lógicamente --
+CREATE PROCEDURE USP_delete_customer
+    @customer_id INT
+AS
+BEGIN
+    UPDATE customers
+    SET active = 0
+    WHERE customer_id = @customer_id
+END
+
+USP_delete_customer 5
+
+select * from customers

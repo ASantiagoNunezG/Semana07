@@ -27,5 +27,16 @@ namespace CapaNegocio
             customerDAO.InsertCustomer(customer);
         }
 
+        public void ActualizarCliente(Customer customer)
+        {
+            customerDAO.UpdateCustomer(customer);
+        }
+
+        public void EliminarCliente(int id)
+        {
+            customerDAO.DeleteCustomer(id);
+        }
+
+
     }
 }

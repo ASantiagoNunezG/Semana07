@@ -24,7 +24,11 @@
             <TextBox x:Name="txtPhone" Width="300" Margin="0,0,0,10"/>
 
             <!-- Botón Registrar -->
-            <Button Content="Registrar" Click="BtnRegistrar_Click" Width="100" Margin="0,0,0,20"/>
+            <Button x:Name="btnRegistrar"  Content="Registrar" Click="BtnRegistrar_Click" Width="100" Margin="0,0,0,20"/>
+
+            <!-- Botón Actualizar (inicialmente oculto) -->
+            <Button x:Name="btnActualizar" Content="Actualizar" Click="BtnActualizar_Click" Width="100" Margin="0,0,0,20" Visibility="Collapsed"/>
+
 
             <Separator Margin="0,0,0,10"/>
 
@@ -34,9 +38,37 @@
                 <TextBox x:Name="txtBuscar" Width="200" Height="25" Margin="0,0,10,0"/>
                 <Button Content="Buscar" Width="100" Click="BtnBuscar_Click"/>
             </StackPanel>
+            <!-- Campo oculto para ID -->
+            <TextBox x:Name="txtId" Visibility="Collapsed"/>
 
             <!-- Tabla de resultados -->
-            <DataGrid x:Name="dgClientes" AutoGenerateColumns="True" Height="500"/>
+            <DataGrid x:Name="dgClientes" AutoGenerateColumns="False" Height="500">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding CustomerId}" Width="Auto"/>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Dirección" Binding="{Binding Address}" Width="*"/>
+                    <DataGridTextColumn Header="Teléfono" Binding="{Binding Phone}" Width="*"/>
+
+                    <!-- Botón Editar -->
+                    <DataGridTemplateColumn Header="Editar">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="✏️" Click="BtnEditar_Click" Tag="{Binding}" Width="50"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!-- Botón Eliminar -->
+                    <DataGridTemplateColumn Header="Eliminar">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="🗑️" Click="BtnEliminar_Click" Tag="{Binding}" Width="50"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
         </StackPanel>
 
     </Grid>
